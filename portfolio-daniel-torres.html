@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Torres — Desenvolvedor Full Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0b0f1a;color:#e8e4dc;min-height:100vh}
+
+.hero{padding:80px 60px 60px;border-bottom:0.5px solid rgba(255,255,255,0.08);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(180,150,100,0.07) 0%,transparent 70%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b49664;border:0.5px solid rgba(180,150,100,0.3);padding:6px 14px;border-radius:2px;margin-bottom:28px}
+.badge span{width:6px;height:6px;background:#b49664;border-radius:50%;display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:64px;font-weight:400;line-height:1.05;color:#f0ece4;letter-spacing:-1px;margin-bottom:16px}
+h1 em{font-style:italic;color:#b49664}
+.tagline{font-size:16px;color:rgba(232,228,220,0.5);font-weight:300;max-width:480px;line-height:1.7;margin-bottom:40px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;padding:6px 14px;border:0.5px solid rgba(255,255,255,0.12);border-radius:2px;color:rgba(232,228,220,0.6);letter-spacing:0.5px}
+.chip.accent{border-color:rgba(180,150,100,0.4);color:#b49664}
+
+.section{padding:60px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#b49664;margin-bottom:40px;display:flex;align-items:center;gap:16px}
+.section-label::after{content:'';flex:1;height:0.5px;background:rgba(255,255,255,0.08)}
+
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06)}
+.project{background:#0b0f1a;padding:40px;position:relative;overflow:hidden;cursor:pointer;transition:background 0.3s}
+.project:hover{background:#0f1420}
+.project.featured{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.proj-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b49664;margin-bottom:16px}
+.proj-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:#f0ece4;margin-bottom:12px;line-height:1.2}
+.proj-desc{font-size:14px;color:rgba(232,228,220,0.5);line-height:1.7;margin-bottom:24px;font-weight:300}
+.proj-stack{display:flex;gap:6px;flex-wrap:wrap}
+.proj-stack span{font-size:11px;padding:4px 10px;border:0.5px solid rgba(255,255,255,0.1);border-radius:2px;color:rgba(232,228,220,0.45);letter-spacing:0.3px}
+.proj-arrow{position:absolute;top:40px;right:40px;font-size:18px;color:rgba(180,150,100,0.3);transition:all 0.3s}
+.project:hover .proj-arrow{color:#b49664;transform:translate(2px,-2px)}
+.proj-visual{background:rgba(180,150,100,0.05);border:0.5px solid rgba(180,150,100,0.12);border-radius:4px;height:200px;display:flex;align-items:center;justify-content:center}
+.proj-visual svg{opacity:0.3}
+.proj-metric{display:flex;gap:32px;margin-top:28px}
+.metric span{display:block}
+.metric .val{font-family:'Playfair Display',serif;font-size:28px;color:#b49664;font-weight:400}
+.metric .lbl{font-size:11px;color:rgba(232,228,220,0.35);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.skill-block{background:#0b0f1a;padding:32px}
+.skill-name{font-size:14px;color:#f0ece4;font-weight:500;margin-bottom:8px}
+.skill-level{height:2px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:8px;overflow:hidden}
+.skill-fill{height:100%;background:linear-gradient(90deg,#b49664,#d4b483);border-radius:2px;width:0;transition:width 1.2s ease}
+.skill-pct{font-size:11px;color:rgba(232,228,220,0.35)}
+
+.exp{border-left:0.5px solid rgba(255,255,255,0.08);padding-left:40px;margin-left:8px}
+.exp-item{position:relative;padding-bottom:40px}
+.exp-item::before{content:'';position:absolute;left:-43px;top:6px;width:6px;height:6px;border:0.5px solid #b49664;border-radius:50%;background:#0b0f1a}
+.exp-item:last-child{padding-bottom:0}
+.exp-period{font-size:11px;color:#b49664;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.exp-role{font-size:17px;color:#f0ece4;font-weight:500;margin-bottom:4px}
+.exp-company{font-size:13px;color:rgba(232,228,220,0.4);margin-bottom:12px}
+.exp-desc{font-size:14px;color:rgba(232,228,220,0.45);line-height:1.7;font-weight:300;max-width:560px}
+
+.contact-row{display:flex;align-items:center;justify-content:space-between;padding:48px 60px;border-top:0.5px solid rgba(255,255,255,0.08)}
+.contact-title{font-family:'Playfair Display',serif;font-size:36px;color:#f0ece4;font-weight:400}
+.contact-title em{font-style:italic;color:#b49664}
+.contact-links{display:flex;gap:20px}
+.contact-link{font-size:13px;padding:10px 24px;border:0.5px solid rgba(255,255,255,0.15);color:rgba(232,228,220,0.6);text-decoration:none;border-radius:2px;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;display:inline-block}
+.contact-link:hover{border-color:rgba(180,150,100,0.5);color:#b49664}
+.contact-link.filled{background:#b49664;border-color:#b49664;color:#0b0f1a;font-weight:500}
+.contact-link.filled:hover{background:#c4a874;border-color:#c4a874}
+
+@media(max-width:768px){
+  .hero{padding:48px 28px 40px}
+  h1{font-size:40px}
+  .section{padding:40px 28px}
+  .projects{grid-template-columns:1fr}
+  .project.featured{grid-column:1;grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .contact-row{flex-direction:column;gap:28px;text-align:center;padding:40px 28px}
+  .proj-visual{display:none}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="badge"><span></span> Portfólio — 2024</div>
+  <h1>Daniel<br><em>Torres</em></h1>
+  <p class="tagline">Desenvolvedor Full Stack especializado em construir produtos digitais robustos, escaláveis e com experiências de usuário refinadas.</p>
+  <div class="chips">
+    <div class="chip accent">Python</div>
+    <div class="chip accent">JavaScript / TypeScript</div>
+    <div class="chip accent">React / Next.js</div>
+    <div class="chip">Node.js</div>
+    <div class="chip">PostgreSQL</div>
+    <div class="chip">REST APIs</div>
+    <div class="chip">Docker</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Projetos selecionados</div>
+  <div class="projects">
+
+    <div class="project featured">
+      <div>
+        <div class="proj-tag">Projeto principal · Full Stack</div>
+        <h2 class="proj-title">Plataforma de Gestão de Pedidos</h2>
+        <p class="proj-desc">Sistema completo para gerenciamento de pedidos em tempo real, com painel administrativo, relatórios automáticos e integração com APIs de pagamento. Reduziu o tempo de processamento em 60%.</p>
+        <div class="proj-stack">
+          <span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>Stripe API</span><span>Docker</span>
+        </div>
+        <div class="proj-metric">
+          <div class="metric"><span class="val">60%</span><span class="lbl">Mais rápido</span></div>
+          <div class="metric"><span class="val">12k</span><span class="lbl">Pedidos / mês</span></div>
+          <div class="metric"><span class="val">99.9%</span><span class="lbl">Uptime</span></div>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="20" width="30" height="60" rx="2" fill="#b49664"/>
+          <rect x="35" y="10" width="30" height="70" rx="2" fill="#b49664"/>
+          <rect x="70" y="30" width="30" height="50" rx="2" fill="#b49664"/>
+          <rect x="105" y="5" width="15" height="75" rx="2" fill="#b49664"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-arrow">↗</div>
+      <div class="proj-tag">Back-end · Python</div>
+      <h2 class="proj-title">API de Automação com n8n</h2>
+      <p class="proj-desc">Serviço de automação de fluxos de trabalho integrado ao n8n, processando dados de múltiplas fontes e disparando notificações inteligentes via WhatsApp e e-mail.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>FastAPI</span><span>n8n</span><span>Redis</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-arrow">↗</div>
+      <div class="proj-tag">Front-end · React</div>
+      <h2 class="proj-title">Dashboard Analítico SaaS</h2>
+      <p class="proj-desc">Interface analítica para plataforma SaaS com gráficos em tempo real, filtros avançados e exportação de relatórios. Construído com foco em performance e acessibilidade.</p>
+      <div class="proj-stack">
+        <span>React</span><span>TypeScript</span><span>Recharts</span><span>Tailwind</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="proj-arrow">↗</div>
+      <div class="proj-tag">Bot · Discord / Node.js</div>
+      <h2 class="proj-title">FlowBot — Bot de Atendimento</h2>
+      <p class="proj-desc">Bot completo para Discord com sistema de tickets, orçamentos automáticos, gestão de pedidos e painel administrativo. Atende mais de 500 usuários ativos por mês.</p>
+      <div class="proj-stack">
+        <span>Node.js</span><span>Discord.js</span><span>SQLite</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" style="border-top:0.5px solid rgba(255,255,255,0.06)">
+  <div class="section-label">Habilidades técnicas</div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-name">React / Next.js</div>
+      <div class="skill-level"><div class="skill-fill" data-width="92"></div></div>
+      <div class="skill-pct">Avançado</div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Python</div>
+      <div class="skill-level"><div class="skill-fill" data-width="88"></div></div>
+      <div class="skill-pct">Avançado</div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Node.js / TypeScript</div>
+      <div class="skill-level"><div class="skill-fill" data-width="85"></div></div>
+      <div class="skill-pct">Avançado</div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">PostgreSQL / SQL</div>
+      <div class="skill-level"><div class="skill-fill" data-width="80"></div></div>
+      <div class="skill-pct">Intermediário-Avançado</div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">REST APIs / FastAPI</div>
+      <div class="skill-level"><div class="skill-fill" data-width="85"></div></div>
+      <div class="skill-pct">Avançado</div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Docker / DevOps</div>
+      <div class="skill-level"><div class="skill-fill" data-width="70"></div></div>
+      <div class="skill-pct">Intermediário</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top:0.5px solid rgba(255,255,255,0.06)">
+  <div class="section-label">Experiência</div>
+  <div class="exp">
+    <div class="exp-item">
+      <div class="exp-period">2023 — Presente</div>
+      <div class="exp-role">Desenvolvedor Full Stack Freelancer</div>
+      <div class="exp-company">Autônomo · Remoto</div>
+      <div class="exp-desc">Desenvolvimento de soluções personalizadas para clientes de diversos segmentos: plataformas SaaS, bots de automação, APIs e dashboards analíticos. Entrega de mais de 15 projetos concluídos.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">2021 — 2023</div>
+      <div class="exp-role">Desenvolvedor Front-end</div>
+      <div class="exp-company">Agência Digital · Valparaiso de Goias, GO</div>
+      <div class="exp-desc">Desenvolvimento e manutenção de interfaces web para clientes enterprise. Liderança técnica na migração de sistemas legados para React e Next.js, melhorando performance em até 40%.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">2019 — 2021</div>
+      <div class="exp-role">Desenvolvedor Júnior</div>
+      <div class="exp-company">Startup de Tecnologia · Remoto</div>
+      <div class="exp-desc">Início da carreira com foco em Python e desenvolvimento back-end. Contribuições em APIs REST, integrações com serviços externos e automação de tarefas operacionais.</div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-row">
+  <div class="contact-title">Vamos<br><em>trabalhar juntos?</em></div>
+  <div class="contact-links">
+    <a href="https://github.com/" class="contact-link" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/" class="contact-link" target="_blank">LinkedIn</a>
+    <a href="mailto:daniel@email.com" class="contact-link filled">Enviar mensagem</a>
+  </div>
+</div>
+
+<script>
+const fills = document.querySelectorAll('.skill-fill');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      el.style.width = el.dataset.width + '%';
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.3 });
+fills.forEach(f => observer.observe(f));
+</script>
+</body>
+</html>
